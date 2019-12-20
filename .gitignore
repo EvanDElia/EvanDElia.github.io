@@ -1,0 +1,104 @@
+_assets/
+_build/
+npm-debug.log
+node_modules
+dist
+.ftppass
+.sass-cache
+
+### Terraform ###
+# Local .terraform directories
+**/.terraform/*
+
+# .tfstate files
+*.tfstate
+*.tfstate.*
+
+# Ignore override files as they are usually used to override resources locally and so
+# are not checked in
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+### Node ###
+# Logs
+logs
+*.log
+
+# Audio and video files
+*.3gp
+*.f4m
+*.flv
+*.m4a
+*.m4v
+*.mov
+*.mp3
+*.mp4
+*.ogg
+*.ogv
+*.wav
+*.webm
+
+# Archive files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.rar
+*.tar
+*.zip
+
+# Misc files
+.htaccess
+*.ai
+*.bak
+*.bmp
+*.eps
+*.exe
+*.fla
+*.log
+*.pdf
+*.psd
+*.sublime-workspace
+*.sublime-project
+*.swc
+*.tif
+*.xls
+*.xlsx
+
+# Compiled Python files
+*.pyc
+
+# Folder view configuration files
+.DS_Store
+Desktop.ini
+
+# Thumbnail cache files
+._*
+Thumbs.db
+
+# Files that might appear on external disks
+.Spotlight-V100
+.Trashes
+
+# =============== #
+# Unity generated #
+# =============== #
+Temp/
+Library/
+
+# ===================================== #
+# Visual Studio / MonoDevelop generated #
+# ===================================== #
+ExportedObj/
+obj/
+*.svd
+*.userprefs
+/*.csproj
+*.pidb
+*.suo
+/*.sln
+*.user
+*.unityproj
+*.booproj
