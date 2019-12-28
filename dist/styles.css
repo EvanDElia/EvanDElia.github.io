@@ -1,0 +1,322 @@
+@import url(https://fonts.googleapis.com/css?family=PT+Sans&display=swap);
+body {
+  background: white;
+  overflow: hidden;
+}
+@media (max-width: 1024px) {
+  body {
+    overflow-y: auto;
+  }
+}
+main {
+  color: white;
+  font-family: 'Helvetica';
+}
+@media (max-width: 1024px) {
+  main {
+    font-size: 1em !important;
+  }
+}
+main h1,
+main h2 {
+  font-family: 'Helvetica';
+  font-size: 24px !important;
+}
+main h1,
+main h2,
+main h3,
+main h4 {
+  color: black;
+  margin: 0px;
+  font-weight: lighter;
+}
+@media (max-width: 1024px) {
+  main h1,
+  main h2,
+  main h3,
+  main h4 {
+    font-size: 1em !important;
+  }
+}
+main a,
+main .project {
+  color: black;
+  text-decoration: underline;
+}
+main a:link,
+main .project:link {
+  text-decoration: underline;
+}
+main a:hover,
+main .project:hover {
+  text-decoration: none;
+}
+main section {
+  width: max-content;
+  margin-bottom: 40px;
+  font-weight: lighter;
+}
+@media (min-width: 768px) {
+  main section {
+    margin-bottom: 70px;
+  }
+}
+@media (max-height: 768px) {
+  main section {
+    margin-bottom: 0px;
+  }
+}
+main section .box {
+  color: black;
+  width: max-content;
+  padding: 10px;
+}
+@media (min-width: 768px) {
+  main section .box {
+    margin-top: 50px;
+    margin-bottom: 20px;
+  }
+}
+main #content {
+  position: absolute;
+  left: 0px;
+  margin: 0px;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  perspective: 400px;
+  transform-style: preserve-3d;
+}
+main #content #slider {
+  transition: opacity 1s ease-out;
+  width: 62%;
+  float: right;
+  opacity: 0;
+  margin-top: -8vh;
+}
+@media (max-width: 1024px) {
+  main #content #slider {
+    width: 100%;
+    height: 40vh;
+  }
+}
+@media (max-width: 1024px) {
+  main #content {
+    height: 30%;
+    bottom: 0px;
+    position: relative;
+  }
+}
+@media (min-width: 900px) {
+  main #content {
+    top: 0px;
+  }
+}
+main #content #slider-arrow-right {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  padding: 1vh;
+  transition: opacity 1s;
+  pointer-events: all;
+}
+@media (max-width: 1024px) {
+  main #content #slider-arrow-right {
+    bottom: 2vw;
+  }
+}
+@media (max-width: 900px) {
+  main #content #slider-arrow-right {
+    bottom: 3vw;
+  }
+}
+main #content #slider-arrow-right img {
+  width: 5vw;
+}
+main #content #slider-arrow-left {
+  position: absolute;
+  right: calc(61% - 6vw);
+  bottom: 0px;
+  padding: 1vh;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s;
+}
+@media (max-width: 1024px) {
+  main #content #slider-arrow-left {
+    bottom: 2vw;
+    right: unset;
+  }
+}
+@media (max-width: 900px) {
+  main #content #slider-arrow-left {
+    bottom: 3vw;
+  }
+}
+main #content #slider-arrow-left img {
+  width: 5vw;
+  mix-blend-mode: difference;
+}
+main #content #landing {
+  margin-top: 8vh;
+  height: 100%;
+  transition: opacity 1s ease-out, perspective 0.9s ease-out;
+  transform-style: preserve-3d;
+  perspective: 300px;
+}
+main #content #landing .front,
+main #content #landing .behind,
+main #content #landing .hello {
+  position: absolute;
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+}
+main #content #landing .front {
+  top: 13vh;
+  right: 50px;
+  animation: float 3s infinite ease-in-out;
+}
+main #content #landing .hello {
+  transform: translateZ(-50px);
+}
+main #content #landing .behind {
+  left: 50px;
+  bottom: 2vh;
+  animation: float2 4s infinite ease-in-out;
+}
+main #content #landing .helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
+main #content #landing img {
+  vertical-align: middle;
+  max-width: 100vw;
+}
+main .resume {
+  transform: rotate(-90deg);
+  position: absolute;
+  left: 0px;
+  width: 0%;
+  font-size: 16px;
+}
+@media (max-width: 1024px) {
+  main .resume {
+    display: none;
+  }
+}
+main .resume .box {
+  position: relative;
+  width: 100vh;
+  text-align: center;
+  padding: 0px;
+  right: calc(75vh - 160px);
+}
+main .copyright-section {
+  transform: rotate(90deg);
+  position: absolute;
+  right: 62.2%;
+  top: 0%;
+  width: 0%;
+}
+@media (max-width: 1024px) {
+  main .copyright-section {
+    right: 2em;
+    font-size: 0.5em;
+    z-index: -1;
+    top: 75%;
+  }
+}
+main .headings,
+main .link-section {
+  font-size: 16px;
+  margin-left: 3em;
+}
+@media (max-width: 1024px) {
+  main .headings,
+  main .link-section {
+    margin-left: 0em;
+  }
+}
+main .headings .name a,
+main .link-section .name a {
+  text-decoration: none;
+  color: black;
+}
+main .headings #description,
+main .link-section #description {
+  position: absolute;
+  opacity: 0;
+  transition: opacity 1s;
+  width: 30%;
+}
+@media (max-width: 1024px) {
+  main .headings #description,
+  main .link-section #description {
+    width: 81vw;
+    margin-top: 40vh;
+  }
+}
+main .headings h1,
+main .link-section h1 {
+  margin: 0px;
+}
+main .headings h2,
+main .link-section h2 {
+  margin: 0px;
+}
+main .headings .project,
+main .link-section .project {
+  margin: 3px auto;
+  letter-spacing: 0px;
+  transition: letter-spacing 2s;
+}
+main .headings .current,
+main .link-section .current {
+  font-weight: bold;
+  text-decoration: none !important;
+  pointer-events: none;
+  letter-spacing: 6px;
+}
+main .link-section {
+  position: absolute;
+}
+@media (min-width: 900px) {
+  main .link-section {
+    bottom: 0px;
+  }
+}
+@media (max-width: 1024px) {
+  main .link-section {
+    transform: rotate(90deg);
+    right: 2em;
+    font-size: 0.5em;
+    width: 0%;
+    top: 0px;
+  }
+}
+@keyframes float {
+  0% {
+    transform: translateY(-10px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-10px);
+  }
+}
+@keyframes float2 {
+  0% {
+    transform: translateY(-20px) translateZ(-90px);
+  }
+  50% {
+    transform: translateY(0px) translateZ(-90px);
+  }
+  100% {
+    transform: translateY(-20px) translateZ(-90px);
+  }
+}
+
