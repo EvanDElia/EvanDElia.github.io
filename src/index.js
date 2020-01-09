@@ -117,7 +117,6 @@ function checkState() {
         document.getElementById('landing').style.opacity = 0;
         document.getElementById('slider-arrow-left').style.opacity = 1;
         document.getElementById('slider-arrow-left').style.pointerEvents = 'all';
-        document.getElementById('slider-arrow-right').style.mixBlendMode = 'difference';
         if (current >= 0 ) document.querySelector('.current').classList.remove('current');
         if (document.getElementsByTagName('main')[0].classList.contains('mobile')) {document.getElementsByTagName('body')[0].style.overflowY = 'auto'};
         document.querySelectorAll('.project')[index-1].classList.add('current');

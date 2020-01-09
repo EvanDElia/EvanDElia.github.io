@@ -9,6 +9,7 @@ body {
 
     @media (max-width: 1024px) {
         overflow-y: auto;
+        overflow-x: hidden;
     }
 }
 
@@ -91,6 +92,7 @@ main {
             float: right;
             opacity: 0;
             margin-top: -8vh;
+            height: 100vh;
 
             @media (max-width: 1024px) {
                 width: 100%;
@@ -118,11 +120,7 @@ main {
             pointer-events: all;
 
             @media (max-width: 1024px) {
-                bottom: 2vw;
-            }
-
-            @media (max-width: 900px) {
-                bottom: 3vw;
+                bottom: 0vw;
             }
 
             img {
@@ -140,17 +138,12 @@ main {
             transition: opacity 1s;
 
             @media (max-width: 1024px) {
-                bottom: 2vw;
+                bottom: 0vw;
                 right: unset;
-            }
-
-            @media (max-width: 900px) {
-                bottom: 3vw;
             }
 
             img {
                 width: 5vw;
-                mix-blend-mode: difference;
             }
         }
 
@@ -254,9 +247,14 @@ main {
             transition: opacity 1s;
             width: 30%;
 
+            @media (min-width: 1400px) {
+                font-size: 2vh;
+            }
+
             @media (max-width: 1024px) {
                 width: 81vw;
                 margin-top: 40vh;
+                margin-bottom: 18px;
             }
         }
 

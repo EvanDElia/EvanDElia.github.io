@@ -135,8 +135,6 @@ module.exports = class Sketch {
     this.plane.scale.y = 1;
 
     this.camera.updateProjectionMatrix();
-
-
   }
 
   calcOffset(xPos, yPos) {
