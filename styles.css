@@ -6,6 +6,7 @@ body {
 @media (max-width: 1024px) {
   body {
     overflow-y: auto;
+    overflow-x: hidden;
   }
 }
 main {
@@ -89,10 +90,12 @@ main #content {
 }
 main #content #slider {
   transition: opacity 1s ease-out;
+  filter: sepia(0.8);
   width: 62%;
   float: right;
   opacity: 0;
   margin-top: -8vh;
+  height: 100vh;
 }
 @media (max-width: 1024px) {
   main #content #slider {
@@ -122,12 +125,7 @@ main #content #slider-arrow-right {
 }
 @media (max-width: 1024px) {
   main #content #slider-arrow-right {
-    bottom: 2vw;
-  }
-}
-@media (max-width: 900px) {
-  main #content #slider-arrow-right {
-    bottom: 3vw;
+    bottom: 0vw;
   }
 }
 main #content #slider-arrow-right img {
@@ -144,18 +142,12 @@ main #content #slider-arrow-left {
 }
 @media (max-width: 1024px) {
   main #content #slider-arrow-left {
-    bottom: 2vw;
+    bottom: 0vw;
     right: unset;
-  }
-}
-@media (max-width: 900px) {
-  main #content #slider-arrow-left {
-    bottom: 3vw;
   }
 }
 main #content #slider-arrow-left img {
   width: 5vw;
-  mix-blend-mode: difference;
 }
 main #content #landing {
   margin-top: 8vh;
@@ -252,11 +244,18 @@ main .link-section #description {
   transition: opacity 1s;
   width: 30%;
 }
+@media (min-width: 1400px) {
+  main .headings #description,
+  main .link-section #description {
+    font-size: 2vh;
+  }
+}
 @media (max-width: 1024px) {
   main .headings #description,
   main .link-section #description {
     width: 81vw;
     margin-top: 40vh;
+    margin-bottom: 18px;
   }
 }
 main .headings h1,
