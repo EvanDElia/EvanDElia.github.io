@@ -77,27 +77,30 @@ module.exports = class Sketch {
     
     window.addEventListener("mousemove", mouseListener);
 
-    // feature detect
-    if (typeof DeviceOrientationEvent.requestPermission === 'function') {
-        DeviceOrientationEvent.requestPermission()
-        .then(permissionState => {
-            if (permissionState === 'granted') {
-            window.removeEventListener('mousemove', mouseListener);
-            window.addEventListener('deviceorientation', (event) => {
-              TweenLite.to("#landing", 0, {
-                rotationX: event.gamma/90*30,
-                rotationY: event.gamma/90*40,
-                rotation: event.gamma/90*16,
-                duration: 0.8,
-                ease: 'sine'
+    document.onclick = () => {
+      // feature detect
+      if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+          DeviceOrientationEvent.requestPermission()
+          .then(permissionState => {
+              if (permissionState === 'granted') {
+              document.onclick = null;
+              window.removeEventListener('mousemove', mouseListener);
+              window.addEventListener('deviceorientation', (event) => {
+                TweenLite.to("#landing", 0, {
+                  rotationX: event.gamma/90*30,
+                  rotationY: event.gamma/90*40,
+                  rotation: event.gamma/90*16,
+                  duration: 0.8,
+                  ease: 'sine'
+                });
               });
-            });
-            }
-        })
-        .catch(console.error);
-    } else {
-        // handle regular non iOS 13+ devices
-        document.onclick = () => {};
+              }
+          })
+          .catch(console.error);
+      } else {
+          // handle regular non iOS 13+ devices
+          document.onclick = () => {};
+      }
     }
 
     Promise.all(promises).then(() => {
