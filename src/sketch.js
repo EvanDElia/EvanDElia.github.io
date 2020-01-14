@@ -70,13 +70,36 @@ module.exports = class Sketch {
     })
 
     var mouseListener = function(event) {
-      // if (document.getElementsByTagName('main')[0].classList.contains('mobile')) return;
       this.pointer.x = event.clientX;
       this.pointer.y = event.clientY;
       this.rotateTxt(this.pointer.x, this.pointer.y);
     }.bind(this);
     
     window.addEventListener("mousemove", mouseListener.bind(this));
+
+    document.onclick = () => {
+      // feature detect
+      if (typeof DeviceOrientationEvent.requestPermission === 'function') {
+          DeviceOrientationEvent.requestPermission()
+          .then(permissionState => {
+              if (permissionState === 'granted') {
+              window.removeEventListener('mousemove', mouseListener);
+              window.addEventListener('deviceorientation', (event) => {
+                TweenLite.to("#landing", 0, {
+                  rotationX: event.gamma/90*30,
+                  rotationY: (event.beta/180+0.5)*50,
+                  rotation: event.gamma/90*30*40,
+                  duration: 0.8,
+                  ease: 'sine'
+                });
+              });
+              }
+          })
+          .catch(console.error);
+      } else {
+          // handle regular non iOS 13+ devices
+      }
+    }
 
     Promise.all(promises).then(() => {
       if (cb) cb();
@@ -149,22 +172,14 @@ module.exports = class Sketch {
     let nPos = this.calcOffset(xPos, yPos); // get cursor position from center 1-0-1
     let nX = nPos[0];
     let nY = nPos[1];
-    if (document.getElementsByTagName('main')[0].classList.contains('mobile'))
-      TweenLite.to("#landing", 0, {
-        rotationX: nY*4,
-        rotationY: nX*6,
-        rotation: nX*5,
-        duration: 2,
-        ease: 'sine'
-      });
-    else
-      TweenLite.to("#landing", 0, {
-        rotationX: nY*30,
-        rotationY: nX*50,
-        rotation: nX*40,
-        duration: 0.8,
-        ease: 'sine'
-      });
+    console.log(nX, nY);
+    TweenLite.to("#landing", 0, {
+      rotationX: nY*30,
+      rotationY: nX*50,
+      rotation: nX*40,
+      duration: 0.8,
+      ease: 'sine'
+    });
   }
 
   addObjects() {

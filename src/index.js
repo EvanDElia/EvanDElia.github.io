@@ -1,9 +1,5 @@
 require('./styles.less');
 
-if (window.innerHeight > window.innerWidth) {
-    document.getElementsByTagName('main')[0].classList.add('mobile');
-}
-
 let Sketch = require('./sketch.js');
 let index = 0;
 let waiting = false;
