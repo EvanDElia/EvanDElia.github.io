@@ -86,7 +86,7 @@ module.exports = class Sketch {
             window.addEventListener('deviceorientation', (event) => {
               TweenLite.to("#landing", 0, {
                 rotationX: event.gamma/90*30,
-                rotationY: event.gamma/90*20,
+                rotationY: event.gamma/90*40,
                 rotation: event.gamma/90*16,
                 duration: 0.8,
                 ease: 'sine'
