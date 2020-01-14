@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=PT+Sans&display=swap);
 body {
   background: white;
-  overflow: hidden !important;
+  overflow: hidden;
 }
 @media (max-width: 1024px) {
   body {
@@ -16,6 +16,7 @@ main {
 @media (max-width: 1024px) {
   main {
     font-size: 1em !important;
+    overflow-x: hidden;
   }
 }
 main h1,
