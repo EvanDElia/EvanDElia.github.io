@@ -16,7 +16,7 @@ main {
 @media (max-width: 1024px) {
   main {
     font-size: 1em !important;
-    overflow-x: hidden;
+    overflow: hidden;
   }
 }
 main h1,
