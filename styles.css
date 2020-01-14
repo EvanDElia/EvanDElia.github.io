@@ -1,12 +1,12 @@
 @import url(https://fonts.googleapis.com/css?family=PT+Sans&display=swap);
 body {
   background: white;
-  overflow: hidden;
+  overflow: hidden !important;
 }
 @media (max-width: 1024px) {
   body {
     overflow-y: auto;
-    overflow-x: hidden;
+    overflow-x: hidden !important;
   }
 }
 main {
