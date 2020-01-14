@@ -86,7 +86,7 @@ module.exports = class Sketch {
               window.removeEventListener('mousemove', mouseListener);
               window.addEventListener('deviceorientation', (event) => {
                 TweenLite.to("#landing", 0, {
-                  rotationX: (event.beta/180+0.5)*10,
+                  rotationX: (event.alpha/180 - 1)*10,
                   rotationY: event.gamma/90*6,
                   rotation: event.gamma/90*30*8,
                   duration: 0.8,
@@ -172,7 +172,6 @@ module.exports = class Sketch {
     let nPos = this.calcOffset(xPos, yPos); // get cursor position from center 1-0-1
     let nX = nPos[0];
     let nY = nPos[1];
-    console.log(nX, nY);
     TweenLite.to("#landing", 0, {
       rotationX: nY*30,
       rotationY: nX*50,
