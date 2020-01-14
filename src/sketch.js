@@ -75,7 +75,7 @@ module.exports = class Sketch {
       this.rotateTxt(this.pointer.x, this.pointer.y);
     }.bind(this);
     
-    window.addEventListener("mousemove", mouseListener.bind(this));
+    window.addEventListener("mousemove", mouseListener);
 
     document.onclick = () => {
       // feature detect
@@ -83,12 +83,13 @@ module.exports = class Sketch {
           DeviceOrientationEvent.requestPermission()
           .then(permissionState => {
               if (permissionState === 'granted') {
+              document.onclick = () => {};
               window.removeEventListener('mousemove', mouseListener);
               window.addEventListener('deviceorientation', (event) => {
                 TweenLite.to("#landing", 0, {
-                  rotationX: (event.alpha/180 - 1)*10,
+                  rotationX: event.gamma/90*10,
                   rotationY: event.gamma/90*6,
-                  rotation: event.gamma/90*30*8,
+                  rotation: event.gamma/90*8,
                   duration: 0.8,
                   ease: 'sine'
                 });
@@ -98,6 +99,7 @@ module.exports = class Sketch {
           .catch(console.error);
       } else {
           // handle regular non iOS 13+ devices
+          document.onclick = () => {};
       }
     }
 
