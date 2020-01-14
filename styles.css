@@ -79,6 +79,41 @@ main section .box {
     margin-bottom: 20px;
   }
 }
+main #slider-arrow-right {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  padding: 1vh;
+  transition: opacity 1s;
+  pointer-events: all;
+}
+@media (max-width: 1024px) {
+  main #slider-arrow-right {
+    bottom: unset;
+    right: 5px;
+  }
+}
+main #slider-arrow-right img {
+  width: 5vw;
+}
+main #slider-arrow-left {
+  position: absolute;
+  right: calc(61% - 6vw);
+  bottom: 0px;
+  padding: 1vh;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1s;
+}
+@media (max-width: 1024px) {
+  main #slider-arrow-left {
+    bottom: unset;
+    right: unset;
+  }
+}
+main #slider-arrow-left img {
+  width: 5vw;
+}
 main #content {
   position: absolute;
   left: 0px;
@@ -115,40 +150,6 @@ main #content #slider {
   main #content {
     top: 0px;
   }
-}
-main #content #slider-arrow-right {
-  position: absolute;
-  right: 0px;
-  bottom: 0px;
-  padding: 1vh;
-  transition: opacity 1s;
-  pointer-events: all;
-}
-@media (max-width: 1024px) {
-  main #content #slider-arrow-right {
-    bottom: 0vw;
-  }
-}
-main #content #slider-arrow-right img {
-  width: 5vw;
-}
-main #content #slider-arrow-left {
-  position: absolute;
-  right: calc(61% - 6vw);
-  bottom: 0px;
-  padding: 1vh;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 1s;
-}
-@media (max-width: 1024px) {
-  main #content #slider-arrow-left {
-    bottom: 0vw;
-    right: unset;
-  }
-}
-main #content #slider-arrow-left img {
-  width: 5vw;
 }
 main #content #landing {
   margin-top: 8vh;
