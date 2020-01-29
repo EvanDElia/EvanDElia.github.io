@@ -1,6 +1,6 @@
 {
   "name": "personal-site",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Personal Website Portfolio",
   "main": "index.js",
   "scripts": {
