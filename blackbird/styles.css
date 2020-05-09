@@ -1,0 +1,146 @@
+html,
+body {
+  height: 100%;
+}
+body {
+  background-color: #000;
+  color: #fff;
+  margin: 0px;
+  overflow: hidden;
+  font-family: Monospace;
+  font-size: 13px;
+  font-weight: bold;
+  text-align: center;
+}
+* {
+  user-select: none;
+}
+a {
+  color: #0078ff;
+}
+#volume {
+  padding: 0px;
+  margin: 0px;
+  -webkit-appearance: slider-vertical;
+}
+#overlay {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#overlay > div > button {
+  height: 20px;
+  background: transparent;
+  color: #ffffff;
+  outline: 1px solid #ffffff;
+  border: 0px;
+  cursor: pointer;
+}
+#overlay > div > p {
+  color: #777777;
+  font-size: 12px;
+}
+#controls_container {
+  display: flex;
+  flex-direction: row;
+  width: 300px;
+  position: absolute;
+  top: 10px;
+  padding: 10px;
+  max-width: 70%;
+  background-color: black;
+  border-radius: 0px 10px 10px 0px;
+  justify-content: space-between;
+}
+#controls_container #info {
+  color: #fff;
+  font-family: 'Helvetica';
+  font-size: 24px;
+  z-index: 98;
+}
+#controls_container #info .active {
+  color: pink;
+}
+#controls_container #controls_inner {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 10px;
+}
+#controls_container #controls_inner * {
+  height: 22px;
+  z-index: 99;
+}
+#controls_container #controls_inner #play {
+  display: none;
+}
+#controls_container #controls_inner #pause {
+  display: block;
+}
+#controls_container .left {
+  width: 90%;
+}
+#controls_container .right {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+svg #normal {
+  visibility: visible;
+}
+svg #hover {
+  visibility: hidden;
+}
+svg:hover #normal {
+  visibility: hidden;
+}
+svg:hover #hover {
+  visibility: visible;
+}
+#share {
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  z-index: 99;
+}
+.fadeIn {
+  animation: fadein 5s linear;
+}
+.fadeOut {
+  animation: fadeout 5s linear;
+}
+#start {
+  width: 100%;
+  height: 100%;
+}
+#progress {
+  background: #dd0000;
+  width: 0%;
+  height: 5px;
+  position: absolute;
+  top: 0;
+  transition: width 0.5s;
+}
+@keyframes fadein {
+  0% {
+    display: block;
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fadeout {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
