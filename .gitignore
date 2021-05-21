@@ -1,6 +1,6 @@
 _assets/
 _build/
-dist/
+dist
 npm-debug.log
 node_modules
 .ftppass
