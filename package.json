@@ -4,7 +4,7 @@
   "description": "Personal Website Portfolio",
   "main": "index.js",
   "scripts": {
-    "build": "webpack -p --env.prod",
+    "build": "NODE_ENV=production webpack -p --env.prod",
     "dev": "webpack-dev-server"
   },
   "devDependencies": {
@@ -18,12 +18,12 @@
     "mini-css-extract-plugin": "^0.8.0",
     "postcss-loader": "^3.0.0",
     "postcss-preset-env": "^6.7.0",
-    "rimraf": "^3.0.0",
     "webpack": "^4.41.2",
     "webpack-cli": "^3.3.7",
     "webpack-dev-server": "^3.8.0"
   },
   "dependencies": {
+    "gsap": "^3.6.1",
     "three": "^0.111.0"
   }
 }

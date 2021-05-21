@@ -1,6 +1,6 @@
 
 var THREE = require('three');
-var gsap = require('./gsap.js');
+var GSAP = require('gsap');
 
 module.exports = class Sketch {
   constructor(opts) {
@@ -27,6 +27,10 @@ module.exports = class Sketch {
     this.width = this.container.offsetWidth;
     this.height = this.container.offsetHeight;
     this.container.appendChild(this.renderer.domElement);
+    this.renderer.domElement.ariaLabel = "image slider";
+    this.renderer.domElement.setAttribute("role", "img");
+    this.renderer.domElement.innerHTML = "<p tabindex='1'>This canvas shows images associated with the text description. This message appears as a fallback. You can also use the arrow keys to navigate through the slider.</p>";
+
 
     this.camera = new THREE.PerspectiveCamera(
       70,
@@ -51,7 +55,6 @@ module.exports = class Sketch {
       this.settings();
       this.addObjects();
       this.resize();
-      this.clickEvent();
       this.play();
     })
     
@@ -86,7 +89,7 @@ module.exports = class Sketch {
               document.onclick = null;
               window.removeEventListener('mousemove', mouseListener);
               window.addEventListener('deviceorientation', (event) => {
-                TweenLite.to("#landing", 0, {
+                GSAP.TweenLite.to("#landing", 0, {
                   rotationX: event.gamma/90*30,
                   rotationY: event.gamma/90*40,
                   rotation: event.gamma/90*16,
@@ -108,11 +111,6 @@ module.exports = class Sketch {
     });
   }
 
-  clickEvent(){
-    // this.clicker.addEventListener('click',()=>{
-    //   this.next();
-    // })
-  }
   settings() {
     let that = this;
     if(this.debug) this.gui = new dat.GUI();
@@ -174,7 +172,7 @@ module.exports = class Sketch {
     let nPos = this.calcOffset(xPos, yPos); // get cursor position from center 1-0-1
     let nX = nPos[0];
     let nY = nPos[1];
-    TweenLite.to("#landing", 0, {
+    GSAP.TweenLite.to("#landing", 0, {
       rotationX: nY*30,
       rotationY: nX*50,
       rotation: nX*40,
