@@ -232,10 +232,10 @@ module.exports = class Sketch {
     let len = this.textures.length;
     let nextTexture =this.textures[(this.current +1)%len];
     this.material.uniforms.texture2.value = nextTexture;
-    let tl = new TimelineMax();
+    let tl = new GSAP.TimelineMax();
     tl.to(this.material.uniforms.progress,this.duration,{
       value:1,
-      ease: Power2[this.easing],
+      ease: GSAP.Power2[this.easing],
       onComplete:()=>{
         console.log('FINISH');
         this.current = (this.current +1)%len;
@@ -256,7 +256,7 @@ module.exports = class Sketch {
     if (this.current - 1 < 0) this.current = len;
     let nextTexture =this.textures[(this.current -1)%len];
     this.material.uniforms.texture2.value = nextTexture;
-    let tl = new TimelineMax();
+    let tl = new GSAP.TimelineMax();
     tl.to(this.material.uniforms.progress,this.duration,{
       value:1,
       ease: Power2[this.easing],
@@ -281,10 +281,10 @@ module.exports = class Sketch {
     let len = this.textures.length;
     let nextTexture =this.textures[(this.current)];
     this.material.uniforms.texture2.value = nextTexture;
-    let tl = new TimelineMax();
+    let tl = new GSAP.TimelineMax();
     tl.to(this.material.uniforms.progress,this.duration,{
       value:1,
-      ease: Power2[this.easing],
+      ease: GSAP.Power2[this.easing],
       onComplete:()=>{
         // console.log('FINISH');
         this.material.uniforms.texture1.value = nextTexture;
