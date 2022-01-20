@@ -102,43 +102,6 @@ body {
   text-decoration: underline;
   color: white;
 }
-.main #slider-arrow-right {
-  position: absolute;
-  right: 0px;
-  bottom: 0px;
-  padding: 1vh;
-  transition: opacity 1s;
-  pointer-events: all;
-  z-index: 1;
-}
-@media (max-width: 1024px) {
-  .main #slider-arrow-right {
-    bottom: unset;
-    right: 5px;
-  }
-}
-.main #slider-arrow-right img {
-  width: 5vw;
-}
-.main #slider-arrow-left {
-  position: absolute;
-  right: calc(61% - 6vw);
-  bottom: 0px;
-  padding: 1vh;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 1s;
-  z-index: 1;
-}
-@media (max-width: 1024px) {
-  .main #slider-arrow-left {
-    bottom: unset;
-    right: unset;
-  }
-}
-.main #slider-arrow-left img {
-  width: 5vw;
-}
 .main #content {
   position: absolute;
   left: 0px;
@@ -149,22 +112,6 @@ body {
   height: 100%;
   perspective: 100px;
   transform-style: preserve-3d;
-}
-.main #content #slider {
-  transition: opacity 1s ease-out;
-  filter: sepia(0.8);
-  width: 62%;
-  float: right;
-  opacity: 0;
-  margin-top: -8vh;
-  height: 100vh;
-  transform: translate(0px, 30px);
-}
-@media (max-width: 1024px) {
-  .main #content #slider {
-    width: 100%;
-    height: 40vh;
-  }
 }
 @media (max-width: 1024px) {
   .main #content {
@@ -181,7 +128,6 @@ body {
 .main #content #landing {
   margin-top: 8vh;
   height: 100%;
-  transition: opacity 1s ease-out, perspective 0.9s ease-out;
   transform-style: preserve-3d;
   perspective: 1000px;
 }
@@ -214,11 +160,6 @@ body {
   font-size: 650px;
   color: white;
   transform: translateZ(-20px);
-}
-@media (max-width: 1370px) {
-  .main #content #landing .hello {
-    font-size: 42vw;
-  }
 }
 .main #content #landing .behind {
   left: 50px;
@@ -284,27 +225,6 @@ body {
 .main .link-section .name a {
   text-decoration: none;
   color: white;
-}
-.main .headings #description,
-.main .link-section #description {
-  position: absolute;
-  opacity: 0;
-  transition: opacity 1s;
-  width: 30%;
-}
-@media (min-width: 1400px) {
-  .main .headings #description,
-  .main .link-section #description {
-    font-size: 2vh;
-  }
-}
-@media (max-width: 1024px) {
-  .main .headings #description,
-  .main .link-section #description {
-    width: 81vw;
-    margin-top: 40vh;
-    margin-bottom: 18px;
-  }
 }
 .main .headings h1,
 .main .link-section h1 {
