@@ -82,18 +82,34 @@ const textParams = [
     }
 ]
 
+if (!mobile) {
+    document.querySelectorAll('.hello')[0].style.fontSize = '650px';
+    document.querySelectorAll('.hello')[0].style.top = '0px';
+} else {
+    document.querySelectorAll('.hello')[0].style.fontSize = '42vw';
+}
+document.querySelectorAll('.hello')[0].style.opacity = 0.333;
+
 document.querySelectorAll('.project').forEach((el, id) => {
     el.onmouseleave = function() {
         document.querySelectorAll('.hello')[0].innerText = 'Hello';
-        document.querySelectorAll('.hello')[0].style.fontSize = '650px';
-        document.querySelectorAll('.hello')[0].style.top = '0px';
+        if (!mobile) {
+            document.querySelectorAll('.hello')[0].style.fontSize = '650px';
+            document.querySelectorAll('.hello')[0].style.top = '0px';
+        } else {
+            document.querySelectorAll('.hello')[0].style.fontSize = '42vw';
+        }
         document.querySelectorAll('.hello')[0].style.opacity = 0.333;
         window.stopAnimating = false;
     }
     el.onmouseover = function() {
         document.querySelectorAll('.hello')[0].innerText = textParams[id].text;
-        document.querySelectorAll('.hello')[0].style.fontSize = textParams[id].fontSize;
-        document.querySelectorAll('.hello')[0].style.top = textParams[id].top;
+        if (!mobile) {
+            document.querySelectorAll('.hello')[0].style.fontSize = textParams[id].fontSize;
+            document.querySelectorAll('.hello')[0].style.top = textParams[id].top;
+        } else {
+            document.querySelectorAll('.hello')[0].style.fontSize = '22vw';
+        }
         document.querySelectorAll('.hello')[0].style.opacity = 1;
         window.stopAnimating = true;
     }
