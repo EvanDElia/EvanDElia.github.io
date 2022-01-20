@@ -5,6 +5,7 @@ npm-debug.log
 node_modules
 .ftppass
 .sass-cache
+.vscode
 
 ### Terraform ###
 # Local .terraform directories

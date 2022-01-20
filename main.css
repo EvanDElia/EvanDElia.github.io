@@ -1,6 +1,20 @@
 @import url(https://fonts.googleapis.com/css?family=PT+Sans&display=swap);
+* {
+  margin: 0;
+  padding: 0;
+}
+html {
+  overflow: hidden;
+}
+.webgl {
+  position: fixed;
+  top: 0;
+  left: 0;
+  outline: none;
+  z-index: -1;
+}
 body {
-  background: white;
+  background: black;
   overflow: hidden;
 }
 @media (max-width: 1024px) {
@@ -9,77 +23,86 @@ body {
     overflow-x: hidden !important;
   }
 }
-main {
+.main {
   color: white;
   font-family: 'Helvetica';
 }
 @media (max-width: 1024px) {
-  main {
+  .main {
     font-size: 1em !important;
     overflow: hidden;
   }
 }
-main h1,
-main h2 {
+.main h1,
+.main h2 {
   font-family: 'Helvetica';
   font-size: 24px !important;
 }
-main h1,
-main h2,
-main h3,
-main h4 {
-  color: black;
+.main h1,
+.main h2,
+.main h3,
+.main h4 {
+  color: white;
   margin: 0px;
   font-weight: lighter;
 }
 @media (max-width: 1024px) {
-  main h1,
-  main h2,
-  main h3,
-  main h4 {
+  .main h1,
+  .main h2,
+  .main h3,
+  .main h4 {
     font-size: 1em !important;
   }
 }
-main a,
-main .project {
-  color: black;
+.main a,
+.main .project {
+  color: white;
   text-decoration: underline;
 }
-main a:link,
-main .project:link {
+.main a:link,
+.main .project:link {
   text-decoration: underline;
 }
-main a:hover,
-main .project:hover {
+.main a:hover,
+.main .project:hover {
   text-decoration: none;
 }
-main section {
+.main section {
   width: max-content;
   margin-bottom: 40px;
   font-weight: lighter;
 }
 @media (min-width: 768px) {
-  main section {
+  .main section {
     margin-bottom: 70px;
   }
 }
 @media (max-height: 768px) {
-  main section {
+  .main section {
     margin-bottom: 0px;
   }
 }
-main section .box {
-  color: black;
+.main section .box {
+  color: white;
   width: max-content;
   padding: 10px;
 }
 @media (min-width: 768px) {
-  main section .box {
+  .main section .box {
     margin-top: 50px;
     margin-bottom: 20px;
   }
 }
-main #slider-arrow-right {
+.main section .company-link {
+  text-decoration: none;
+  color: white;
+  transition: text-decoration 0.2 ease-in-out;
+}
+.main section .company-link:hover {
+  text-decoration: underline;
+  color: white;
+}
+.main #slider-arrow-right {
   position: absolute;
   right: 0px;
   bottom: 0px;
@@ -89,15 +112,15 @@ main #slider-arrow-right {
   z-index: 1;
 }
 @media (max-width: 1024px) {
-  main #slider-arrow-right {
+  .main #slider-arrow-right {
     bottom: unset;
     right: 5px;
   }
 }
-main #slider-arrow-right img {
+.main #slider-arrow-right img {
   width: 5vw;
 }
-main #slider-arrow-left {
+.main #slider-arrow-left {
   position: absolute;
   right: calc(61% - 6vw);
   bottom: 0px;
@@ -108,15 +131,15 @@ main #slider-arrow-left {
   z-index: 1;
 }
 @media (max-width: 1024px) {
-  main #slider-arrow-left {
+  .main #slider-arrow-left {
     bottom: unset;
     right: unset;
   }
 }
-main #slider-arrow-left img {
+.main #slider-arrow-left img {
   width: 5vw;
 }
-main #content {
+.main #content {
   position: absolute;
   left: 0px;
   margin: 0px;
@@ -124,10 +147,10 @@ main #content {
   pointer-events: none;
   width: 100%;
   height: 100%;
-  perspective: 400px;
+  perspective: 100px;
   transform-style: preserve-3d;
 }
-main #content #slider {
+.main #content #slider {
   transition: opacity 1s ease-out;
   filter: sepia(0.8);
   width: 62%;
@@ -135,64 +158,84 @@ main #content #slider {
   opacity: 0;
   margin-top: -8vh;
   height: 100vh;
+  transform: translate(0px, 30px);
 }
 @media (max-width: 1024px) {
-  main #content #slider {
+  .main #content #slider {
     width: 100%;
     height: 40vh;
   }
 }
 @media (max-width: 1024px) {
-  main #content {
+  .main #content {
     height: 30%;
     bottom: 0px;
     position: relative;
   }
 }
 @media (min-width: 900px) {
-  main #content {
+  .main #content {
     top: 0px;
   }
 }
-main #content #landing {
+.main #content #landing {
   margin-top: 8vh;
   height: 100%;
   transition: opacity 1s ease-out, perspective 0.9s ease-out;
   transform-style: preserve-3d;
-  perspective: 300px;
+  perspective: 1000px;
 }
-main #content #landing .front,
-main #content #landing .behind,
-main #content #landing .hello {
+@media (max-width: 1370px) {
+  .main #content #landing {
+    min-height: 40vh;
+  }
+}
+.main #content #landing .front,
+.main #content #landing .behind,
+.main #content #landing .hello {
   position: absolute;
   margin: 0 auto;
   text-align: center;
   width: 100%;
   height: 100%;
+  perspective: 1000px;
+  opacity: 0.333;
+  transition: opacity 0.7s ease;
 }
-main #content #landing .front {
+.main #content #landing .front {
   top: 13vh;
   right: 50px;
   animation: float 3s infinite ease-in-out;
 }
-main #content #landing .hello {
-  transform: translateZ(-50px);
+.main #content #landing .front img {
+  transform: translateZ(200px);
 }
-main #content #landing .behind {
+.main #content #landing .hello {
+  font-size: 650px;
+  color: white;
+  transform: translateZ(-20px);
+}
+@media (max-width: 1370px) {
+  .main #content #landing .hello {
+    font-size: 42vw;
+  }
+}
+.main #content #landing .behind {
   left: 50px;
   bottom: 2vh;
   animation: float2 4s infinite ease-in-out;
+  transform: translateZ(-320px);
 }
-main #content #landing .helper {
+.main #content #landing .helper {
   display: inline-block;
   height: 100%;
   vertical-align: middle;
 }
-main #content #landing img {
+.main #content #landing img {
   vertical-align: middle;
   max-width: 100vw;
 }
-main .resume {
+.main .resume {
   transform: rotate(-90deg);
   position: absolute;
   left: 0px;
@@ -200,18 +243,18 @@ main .resume {
   font-size: 16px;
 }
 @media (max-width: 1024px) {
-  main .resume {
+  .main .resume {
     display: none;
   }
 }
-main .resume .box {
+.main .resume .box {
   position: relative;
   width: 100vh;
   text-align: center;
   padding: 0px;
   right: calc(75vh - 160px);
 }
-main .copyright-section {
+.main .copyright-section {
   transform: rotate(90deg);
   position: absolute;
   right: 62.2%;
@@ -219,81 +262,79 @@ main .copyright-section {
   width: 0%;
 }
 @media (max-width: 1024px) {
-  main .copyright-section {
+  .main .copyright-section {
     right: 2em;
     font-size: 0.5em;
     z-index: -1;
     top: 80vh;
   }
 }
-main .headings,
-main .link-section {
+.main .headings,
+.main .link-section {
   font-size: 16px;
   margin-left: 3em;
 }
 @media (max-width: 1024px) {
-  main .headings,
-  main .link-section {
+  .main .headings,
+  .main .link-section {
     margin-left: 0em;
   }
 }
-main .headings .name a,
-main .link-section .name a {
+.main .headings .name a,
+.main .link-section .name a {
   text-decoration: none;
-  color: black;
+  color: white;
 }
-main .headings #description,
-main .link-section #description {
+.main .headings #description,
+.main .link-section #description {
   position: absolute;
   opacity: 0;
   transition: opacity 1s;
   width: 30%;
 }
 @media (min-width: 1400px) {
-  main .headings #description,
-  main .link-section #description {
+  .main .headings #description,
+  .main .link-section #description {
     font-size: 2vh;
   }
 }
 @media (max-width: 1024px) {
-  main .headings #description,
-  main .link-section #description {
+  .main .headings #description,
+  .main .link-section #description {
     width: 81vw;
     margin-top: 40vh;
     margin-bottom: 18px;
   }
 }
-main .headings h1,
-main .link-section h1 {
+.main .headings h1,
+.main .link-section h1 {
   margin: 0px;
 }
-main .headings h2,
-main .link-section h2 {
+.main .headings h2,
+.main .link-section h2 {
   margin: 0px;
 }
-main .headings .project,
-main .link-section .project {
-  margin: 3px auto;
+.main .headings .project,
+.main .link-section .project {
+  padding: 2px;
   letter-spacing: 0px;
   transition: letter-spacing 2s;
+  display: block;
 }
-main .headings .current,
-main .link-section .current {
-  font-weight: bold;
-  text-decoration: none !important;
-  pointer-events: none;
+.main .headings .project:hover,
+.main .link-section .project:hover {
   letter-spacing: 6px;
 }
-main .link-section {
+.main .link-section {
   position: absolute;
 }
 @media (min-width: 900px) {
-  main .link-section {
+  .main .link-section {
     bottom: 0px;
   }
 }
 @media (max-width: 1024px) {
-  main .link-section {
+  .main .link-section {
     transform: rotate(90deg);
     right: 2em;
     font-size: 0.5em;
@@ -324,3 +365,5 @@ main .link-section {
   }
 }
 
+
+/*# sourceMappingURL=main.css.map*/
