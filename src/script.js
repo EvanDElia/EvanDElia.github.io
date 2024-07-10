@@ -1,5 +1,4 @@
 import './style.less'
-import { gsap } from "gsap"
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import * as dat from 'dat.gui'
@@ -14,7 +13,6 @@ import waterVertexShader from './shaders/vertex.glsl'
 import waterFragmentShader from './shaders/fragment.glsl'
 
 
-let pointer = {x: 0, y: 0};
 const mobile = (window.innerWidth <= 1370);
 
 function calcOffset(xPos, yPos) {
@@ -25,82 +23,77 @@ function calcOffset(xPos, yPos) {
     return [dX,dY];
 }
 
-function rotateTxt(xPos, yPos) {
-    if (!window.stopAnimating) {
-        let nPos = calcOffset(xPos, yPos);
-        let nX = nPos[0];
-        let nY = nPos[1];
-        gsap.to("#landing", 0.4, {
-        rotationX: nY*30,
-        rotationY: nX*50,
-        rotation: nX*40,
-        }); 
-    } else {
-        gsap.to("#landing", 0.5, {
-            rotationX: 0,
-            rotationY: 0,
-            rotation: 0,
-            ease: "elastic.out(3, 0.75)"
-        });
-    }
-}
-
-var mouseListener = function(event) {
-    pointer.x = event.clientX;
-    pointer.y = event.clientY;
-    rotateTxt(pointer.x, pointer.y);
-}
-
-if (!mobile)
-    window.addEventListener("mousemove", mouseListener);
-
 const textParams = [
     {
+        top: '110px',
+        fontSize: '100px',
+        text: 'Slosh Seltzer'
+    },
+    {
+        top: '130px',
+        fontSize: '100px',
+        text: 'Pepsi'
+    },
+    {
         top: '150px',
-        fontSize: '370px',
+        fontSize: '100px',
+        text: 'WSJ: The Field'
+    },
+    {
+        top: '180px',
+        fontSize: '100px',
+        text: 'Dreamwave'
+    },
+    {
+        top: '210px',
+        fontSize: '100px',
+        text: 'SXSW'
+    },
+    {
+        top: '230px',
+        fontSize: '100px',
         text: 'Doja Cat'
     },
     {
-        top: '180px',
-        fontSize: '350px',
-        text: 'adult swim'
+        top: '250px',
+        fontSize: '100px',
+        text: '[adult swim]'
     },
     {
-        top: '180px',
-        fontSize: '350px',
+        top: '280px',
+        fontSize: '100px',
         text: '[as] music'
     },
     {
-        top: '250px',
-        fontSize: '260px',
+        top: '310px',
+        fontSize: '100px',
+        text: 'Innovasian'
+    },
+    {
+        top: '330px',
+        fontSize: '100px',
         text: 'Neon Night'
     },
     {
-        top: '250px',
-        fontSize: '260px',
+        top: '350px',
+        fontSize: '100px',
         text: 'Ocean World'
     }
 ]
 
-if (!mobile) {
-    document.querySelectorAll('.hello')[0].style.fontSize = '650px';
-    document.querySelectorAll('.hello')[0].style.top = '0px';
-} else {
-    document.querySelectorAll('.hello')[0].style.fontSize = '42vw';
-}
-document.querySelectorAll('.hello')[0].style.opacity = 0.333;
-
+if (!mobile)
 document.querySelectorAll('.project').forEach((el, id) => {
     el.onmouseleave = function() {
-        document.querySelectorAll('.hello')[0].innerText = 'Hello';
+        document.querySelectorAll('.hello')[0].innerText = '';
         if (!mobile) {
-            document.querySelectorAll('.hello')[0].style.fontSize = '650px';
+            document.querySelectorAll('.hello')[0].style.fontSize = '350px';
             document.querySelectorAll('.hello')[0].style.top = '0px';
         } else {
             document.querySelectorAll('.hello')[0].style.fontSize = '42vw';
         }
         document.querySelectorAll('.hello')[0].style.opacity = 0.333;
         window.stopAnimating = false;
+        document.querySelectorAll('.headings')[0].classList.remove('hovering');
     }
     el.onmouseover = function() {
         document.querySelectorAll('.hello')[0].innerText = textParams[id].text;
@@ -112,8 +105,17 @@ document.querySelectorAll('.project').forEach((el, id) => {
         }
         document.querySelectorAll('.hello')[0].style.opacity = 1;
         window.stopAnimating = true;
+        document.querySelectorAll('.headings')[0].classList.add('hovering');
     }
 })
+
+document.querySelectorAll('.copyright')[0].innerText += ` ${new Date().getFullYear()}`;
+
+setTimeout(() => {
+    document.getElementById('nameBox').style.opacity = 1;
+    document.querySelectorAll('.main')[0].style['mix-blend-mode'] = 'difference';
+}, 2000)
+
 
 /**
  * Base
@@ -121,12 +123,11 @@ document.querySelectorAll('.project').forEach((el, id) => {
 // Debug
 const params = new URLSearchParams(window.location.search);
 let gui;
-if (params.has('secret') || params.has('gui') || params.has('debug'))
+if (params.has('secret') || params.has('gui') || params.has('debug') || !mobile)
     gui = new dat.GUI({ width: 640 })
 const debugObject = {}
 debugObject.depthColor = '#59798e'
 debugObject.surfaceColor = '#124866'
-
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
@@ -158,27 +159,6 @@ const waterMaterial = new THREE.ShaderMaterial({
         uSurfaceColor: { value: new THREE.Color(debugObject.surfaceColor) }
     }
 })
-
-//Debug
-if (params.has('secret') || params.has('gui') || params.has('debug')) {
-    gui.add(waterMaterial.uniforms.uBigWaveElevation, 'value').min(0).max(1).step(0.001).name('BigWaveElevation')
-    gui.add(waterMaterial.uniforms.uBigWaveFrequency.value, 'x').min(0).max(5).step(0.01).name('BigWaveFreqX')
-    gui.add(waterMaterial.uniforms.uBigWaveFrequency.value, 'y').min(0).max(5).step(0.01).name('BigWaveFreqY')
-    gui.add(waterMaterial.uniforms.uBigWaveSpeed, 'value' ).min(0).max(5).step(0.01).name('BigWaveSpeed')
-    gui.addColor(debugObject, 'depthColor').onChange(() => { waterMaterial.uniforms.uDepthColor.value.set(debugObject.depthColor) })
-    gui.addColor(debugObject, 'surfaceColor').onChange(() => { waterMaterial.uniforms.uSurfaceColor.value.set(debugObject.surfaceColor) })
-    gui.add(waterMaterial.uniforms.uColorOffset, 'value' ).min(0).max(5).step(0.01).name('ColorOffset')
-    gui.add(waterMaterial.uniforms.uColorMultiplier, 'value' ).min(0).max(5).step(0.01).name('ColorMultiplier')
-
-    gui.add(waterMaterial.uniforms.uSmallWaveElevation, 'value').min(0).max(1).step(0.001).name('SmallWaveElevation')
-    gui.add(waterMaterial.uniforms.uSmallWaveSpeed, 'value').min(0).max(5).step(0.01).name('SmallWaveSpeed')
-    gui.add(waterMaterial.uniforms.uSmallWaveFrequency, 'value').min(0).max(5).step(0.01).name('SmallWaveFreq')
-    gui.add(waterMaterial.uniforms.uSmallWaveIterations, 'value' ).min(0).max(5).step(1).name('SmallWaveIterations')
-
-    gui.close();
-}
-
-
 
 // Mesh
 const water = new THREE.Mesh(waterGeometry, waterMaterial)
@@ -217,7 +197,7 @@ window.addEventListener('resize', () =>
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.set(1, 0.5, -1)
+camera.position.set(1.2, 0.25, 0)
 scene.add(camera)
 
 // Controls
@@ -335,17 +315,35 @@ const dotScreenShader = {
 const dotScreenPass = new ShaderPass(dotScreenShader)
 if (!mobile) effectComposer.addPass(dotScreenPass)
 
-RGBShiftShader.uniforms.amount.value = 0.0025;
+RGBShiftShader.uniforms.amount.value = 0.0039;
 RGBShiftShader.uniforms.angle.value = 0.121;
 const rgbShiftPass = new ShaderPass(RGBShiftShader)
 rgbShiftPass.enabled = !mobile;
 effectComposer.addPass(rgbShiftPass)
 
 const unrealBloomPass = new UnrealBloomPass()
-unrealBloomPass.strength = 0.1;
+unrealBloomPass.strength = 0.4;
 unrealBloomPass.radius = 1;
-unrealBloomPass.threshold = 0.6;
+unrealBloomPass.threshold = 0.2;
 effectComposer.addPass(unrealBloomPass)
+
+//Debug
+if (params.has('secret') || params.has('gui') || params.has('debug') || !mobile) {
+    gui.add(waterMaterial.uniforms.uBigWaveElevation, 'value').min(0).max(1).step(0.001).name('BigWaveElevation')
+    gui.add(waterMaterial.uniforms.uBigWaveFrequency.value, 'x').min(0).max(5).step(0.01).name('BigWaveFreqX')
+    gui.add(waterMaterial.uniforms.uBigWaveFrequency.value, 'y').min(0).max(5).step(0.01).name('BigWaveFreqY')
+    gui.add(waterMaterial.uniforms.uBigWaveSpeed, 'value' ).min(0).max(5).step(0.01).name('BigWaveSpeed')
+    gui.addColor(debugObject, 'depthColor').onChange(() => { waterMaterial.uniforms.uDepthColor.value.set(debugObject.depthColor) })
+    gui.addColor(debugObject, 'surfaceColor').onChange(() => { waterMaterial.uniforms.uSurfaceColor.value.set(debugObject.surfaceColor) })
+    gui.add(waterMaterial.uniforms.uColorOffset, 'value' ).min(0).max(5).step(0.01).name('ColorOffset')
+    gui.add(waterMaterial.uniforms.uColorMultiplier, 'value' ).min(0).max(5).step(0.01).name('ColorMultiplier')
+
+    gui.add(waterMaterial.uniforms.uSmallWaveElevation, 'value').min(0).max(1).step(0.001).name('SmallWaveElevation')
+    gui.add(waterMaterial.uniforms.uSmallWaveSpeed, 'value').min(0).max(5).step(0.01).name('SmallWaveSpeed')
+    gui.add(waterMaterial.uniforms.uSmallWaveFrequency, 'value').min(0).max(5).step(0.01).name('SmallWaveFreq')
+    gui.add(unrealBloomPass, 'strength' ).min(0).max(5).step(0.1).name('Bloom Strength')
+    gui.close();
+}
 
 /**
  * Animate

@@ -8,8 +8,19 @@
     padding: 0;
 }
 
+a {
+    pointer-events: all;
+}
+
 html {
     overflow: hidden;
+}
+
+.dg.a {
+    position: absolute;
+    pointer-events: all;
+    right: 0;
+    height: min-content;
 }
 
 .webgl {
@@ -17,7 +28,7 @@ html {
     top: 0;
     left: 0;
     outline: none;
-    z-index: -1;
+    z-index: 0;
 }
 
 body {
@@ -33,6 +44,11 @@ body {
 .main {
     color: @text-color;
     font-family: 'Helvetica';
+    position: absolute;
+    width: 100dvw;
+    height: 100vh;
+    pointer-events: none;
+    user-select: none;
 
     @media(max-width: 1024px) {
         font-size: 1em !important;
@@ -56,11 +72,6 @@ body {
 
     a, .project {
         color: @text-color;
-        text-decoration: underline;
-
-        &:link {
-            text-decoration: underline;
-        }
 
         &:hover {
             text-decoration: none;
@@ -78,6 +89,11 @@ body {
 
         @media (max-height: 768px) {
             margin-bottom: 0px;
+        }
+
+        #nameBox {
+            opacity: 0;
+            transition: all 0.5s ease-out;
         }
 
         .box {
@@ -131,6 +147,7 @@ body {
             height: 100%;
             transform-style: preserve-3d;
             perspective: 1000px;
+            pointer-events: none;
 
             @media(max-width:1370px) {
                 min-height: 40vh;
@@ -146,6 +163,7 @@ body {
                 perspective: 1000px;
                 opacity: 0.333;
                 transition: opacity 0.7s ease;
+                pointer-events: none;
             }
 
             .front {
@@ -159,7 +177,7 @@ body {
             }
 
             .hello {
-                font-size: 650px;
+                font-size: 150px;
                 color: @text-color;
                 transform: translateZ(-20px);
 
@@ -192,7 +210,7 @@ body {
     .resume {
         transform: rotate(-90deg);
         position: absolute;
-        left: 0px;
+        left: 2em;
         width: 0%;
         font-size: 16px;
 
@@ -212,24 +230,27 @@ body {
     .copyright-section {
         transform: rotate(90deg);
         position: absolute;
-        right: 62.2%;
+        right: 2em;
         top: 0%;
         width: 0%;
 
         @media (max-width: 1024px) {
-            right: 2em;
-            font-size: 0.5em;
-            z-index: -1;
-            top: 80vh;
+            opacity: 0;
         }
     }
 
     .headings, .link-section {
         font-size: 16px;
         margin-left: 3em;
+        z-index: 2;
 
         @media (max-width: 1024px) {
             margin-left: 0em;
+        }
+
+        .subtitle {
+            text-decoration: underline;
+            margin-bottom: 10px;
         }
 
         .name a {
@@ -246,19 +267,31 @@ body {
         }
 
         .project {
-            padding: 2px;
+            padding: 4px 2px;
             letter-spacing: 0px;
-            transition: letter-spacing 2s;
+            transition: letter-spacing 1.2s ease-out, opacity 0.3s ease-out;
             display: block;
+            text-decoration: none;
 
             &:hover {
                 letter-spacing: 6px;
+                opacity: 1 !important;
             }
+        }
+    }
+
+    .headings.hovering {
+        .project {
+            opacity: 0.5;
         }
     }
 
     .link-section {
         position: absolute;
+
+        a {
+            margin: 0px 5px;
+        }
 
         @media (min-width: 900px) {
             bottom: 0px;
