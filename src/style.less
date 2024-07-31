@@ -14,6 +14,11 @@ html {
     overflow: hidden;
 }
 
+body {
+    opacity: 0;
+    transition: opacity 1s ease-out;
+}
+
 .dg.a {
     position: absolute;
     pointer-events: all;
@@ -27,6 +32,7 @@ html {
     left: 0;
     outline: none;
     z-index: 0;
+    cursor: grab;
 }
 
 body {
@@ -70,6 +76,7 @@ body {
 
     a, .project {
         color: @text-color;
+        width: max-content;
 
         &:hover {
             text-decoration: none;
@@ -89,11 +96,6 @@ body {
             margin-bottom: 0px;
         }
 
-        #nameBox {
-            opacity: 0;
-            transition: all 0.5s ease-out;
-        }
-
         .box {
             color: @text-color;
             width: max-content;
@@ -109,7 +111,7 @@ body {
         .company-link {
             text-decoration: none;
             color: @text-color;
-            transition: text-decoration 0.2 ease-in-out;
+            transition: text-decoration 0.3s ease-in-out;
 
             &:hover{
                 text-decoration: underline;
@@ -177,7 +179,7 @@ body {
             .poster {
                 margin: 0 auto;
                 opacity: 0;
-                transition: opacity 0.2s ease-out;
+                transition: opacity 1s ease-out;
                 width: min-content;
                 top: 100px;
                 position: relative;
@@ -185,7 +187,7 @@ body {
 
                 img {
                     width: 50vw;
-                    filter: blur(3px);
+                    // filter: blur(3px);
                     border-radius: 20px;
                 }
             }

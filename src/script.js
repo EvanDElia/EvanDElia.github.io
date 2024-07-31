@@ -12,16 +12,19 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 import waterVertexShader from './shaders/vertex.glsl'
 import waterFragmentShader from './shaders/fragment.glsl'
 
+function isMobile() {
+    if ('maxTouchPoints' in navigator) return navigator.maxTouchPoints > 0;
 
-const mobile = (window.innerWidth <= 1370);
-
-function calcOffset(xPos, yPos) {
-    let winW = window.innerWidth;
-    let winH = window.innerHeight/1.3;
-    let dX = 2*(xPos - winW/2)/winW;
-    let dY = -2*(yPos - winH/2)/winH + 1;
-    return [dX,dY];
+    const mQ = matchMedia?.('(pointer:coarse)');
+    if (mQ?.media === '(pointer:coarse)') return !!mQ.matches;
+    
+    if ('orientation' in window) return true;
+    
+    return /\b(BlackBerry|webOS|iPhone|IEMobile)\b/i.test(navigator.userAgent) ||
+      /\b(Android|Windows Phone|iPad|iPod)\b/i.test(navigator.userAgent);
 }
+
+const mobile = isMobile();
 
 const textParams = [
     {
@@ -31,13 +34,13 @@ const textParams = [
     },
     {
         fontSize: '100px',
-        image: 'pepsi.jpg',
-        text: 'Pepsi'
+        image: 'thefield.jpg',
+        text: 'WSJ: The Field'
     },
     {
         fontSize: '100px',
-        image: 'thefield.jpg',
-        text: 'WSJ: The Field'
+        image: 'pepsi.jpg',
+        text: 'Pepsi'
     },
     {
         fontSize: '100px',
@@ -86,13 +89,12 @@ document.querySelectorAll('.project').forEach((el, id) => {
     el.onmouseleave = function() {
         document.querySelectorAll('.hello')[0].innerText = '';
         if (!mobile) {
-            document.querySelectorAll('.hello')[0].style.fontSize = '350px';
             document.querySelectorAll('.hello')[0].style.top = '0px';
             document.querySelectorAll('.poster')[0].style.opacity = 0;
         } else {
             document.querySelectorAll('.hello')[0].style.fontSize = '42vw';
         }
-        document.querySelectorAll('.hello')[0].style.opacity = 0.333;
+        document.querySelectorAll('.hello')[0].style.opacity = 0;
         window.stopAnimating = false;
         document.querySelectorAll('.headings')[0].classList.remove('hovering');
     }
@@ -100,7 +102,7 @@ document.querySelectorAll('.project').forEach((el, id) => {
         document.querySelectorAll('.hello')[0].innerText = textParams[id].text;
         if (!mobile) {
             document.querySelectorAll('.hello')[0].style.fontSize = textParams[id].fontSize;
-            document.querySelectorAll('.poster')[0].style.opacity = 0.5;
+            document.querySelectorAll('.poster')[0].style.opacity = 0.65;
             document.querySelectorAll('.hello')[0].style.top = `${110 + id * 20}px`;
             document.querySelectorAll('.poster')[0].style.top = `${30 + id * 20}px`;
             document.querySelectorAll('.poster__image')[0].src = `https://evandelia.com/img/${textParams[id].image}`;
@@ -117,8 +119,9 @@ document.querySelectorAll('.copyright')[0].innerText += ` ${new Date().getFullYe
 
 setTimeout(() => {
     document.getElementById('nameBox').style.opacity = 1;
-    document.querySelectorAll('.main')[0].style['mix-blend-mode'] = 'difference';
-}, 2000)
+    document.body.style.opacity = 1;
+    // document.querySelectorAll('.main')[0].style['mix-blend-mode'] = 'difference';
+}, 10)
 
 
 /**
@@ -127,8 +130,6 @@ setTimeout(() => {
 // Debug
 const params = new URLSearchParams(window.location.search);
 let gui;
-if (params.has('secret') || params.has('gui') || params.has('debug') || !mobile)
-    gui = new dat.GUI({ width: 640 })
 const debugObject = {}
 debugObject.depthColor = '#59798e'
 debugObject.surfaceColor = '#124866'
@@ -338,9 +339,10 @@ unrealBloomPass.threshold = 0.5;
 //     new THREE.Color('deeppink')
 // ];
 effectComposer.addPass(unrealBloomPass);
-
-//Debug
+//dat gui
 if (!mobile) {
+    gui = new dat.GUI({ width: 640 })
+
     gui.add(waterMaterial.uniforms.uBigWaveElevation, 'value').min(0).max(1).step(0.001).name('BigWaveElevation')
     gui.add(waterMaterial.uniforms.uBigWaveFrequency.value, 'x').min(0).max(5).step(0.01).name('BigWaveFreqX')
     gui.add(waterMaterial.uniforms.uBigWaveFrequency.value, 'y').min(0).max(5).step(0.01).name('BigWaveFreqY')
@@ -360,24 +362,52 @@ if (!mobile) {
 /**
  * Animate
  */
-const clock = new THREE.Clock()
+const clock = new THREE.Clock();
+
+let mousePos =  {
+    x: 0,
+    y: 0
+}
+let nextPos = 0;
+
+if (!mobile) {
+    window.addEventListener('mousemove', (e) => {
+        mousePos.x = e.clientX;
+        mousePos.y = e.clientY;
+    });
+
+    window.addEventListener('pointerdown', (e) => {
+        canvas.style.cursor = 'grabbing';
+    });
+
+    window.addEventListener('pointerup', (e) => {
+        canvas.style.cursor = 'grab';
+    });
+}
 
 const tick = () =>
 {
-    const elapsedTime = clock.getElapsedTime()
-    waterMaterial.uniforms.uTime.value = elapsedTime
+    const elapsedTime = clock.getElapsedTime();
+    waterMaterial.uniforms.uTime.value = elapsedTime;
 
     // Update controls
-    controls.update()
+    controls.update();
 
     // camera.position.set(Math.cos((elapsedTime * 0.6)), Math.sin((elapsedTime * 0.6) - 10) * 0.5 + 0.6, Math.sin((elapsedTime * 0.6)))
 
     // Render
     // renderer.render(scene, camera)
-    effectComposer.render()
+    effectComposer.render();
+
+    nextPos = lerp(nextPos, mousePos.x / 2 - 90, 0.09);
+    document.querySelectorAll('.poster__image')[0].style.margin = `0px 0px 0px ${nextPos}px`;
 
     // Call tick again on the next frame
-    window.requestAnimationFrame(tick)
+    window.requestAnimationFrame(tick);
 }
 
-tick()
+tick();
+
+function lerp( a, b, alpha ) {
+    return a + alpha * ( b - a );
+}
