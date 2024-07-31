@@ -26,46 +26,57 @@ function calcOffset(xPos, yPos) {
 const textParams = [
     {
         fontSize: '100px',
+        image: 'slosh.jpg',
         text: 'Slosh Seltzer'
     },
     {
         fontSize: '100px',
+        image: 'pepsi.jpg',
         text: 'Pepsi'
     },
     {
         fontSize: '100px',
+        image: 'thefield.jpg',
         text: 'WSJ: The Field'
     },
     {
         fontSize: '100px',
+        image: 'dreamwave.jpg',
         text: 'Dreamwave'
     },
     {
         fontSize: '100px',
+        image: 'sxsw.jpg',
         text: 'SXSW'
     },
     {
         fontSize: '100px',
+        image: 'espn.jpg',
         text: 'ESPN Fifty50'
     },
     {
         fontSize: '100px',
+        image: 'doja.jpg',
         text: 'Doja Cat'
     },
     {
         fontSize: '100px',
+        image: 'adultswimdotcom.jpg',
         text: '[adult swim]'
     },
     {
         fontSize: '100px',
+        image: 'asmusic.jpg',
         text: '[as] music'
     },
     {
         fontSize: '100px',
+        image: 'neonnight.jpg',
         text: 'Neon Night'
     },
     {
         fontSize: '100px',
+        image: 'oceanworld.jpg',
         text: 'Ocean World'
     }
 ]
@@ -77,6 +88,7 @@ document.querySelectorAll('.project').forEach((el, id) => {
         if (!mobile) {
             document.querySelectorAll('.hello')[0].style.fontSize = '350px';
             document.querySelectorAll('.hello')[0].style.top = '0px';
+            document.querySelectorAll('.poster')[0].style.opacity = 0;
         } else {
             document.querySelectorAll('.hello')[0].style.fontSize = '42vw';
         }
@@ -88,7 +100,10 @@ document.querySelectorAll('.project').forEach((el, id) => {
         document.querySelectorAll('.hello')[0].innerText = textParams[id].text;
         if (!mobile) {
             document.querySelectorAll('.hello')[0].style.fontSize = textParams[id].fontSize;
+            document.querySelectorAll('.poster')[0].style.opacity = 0.5;
             document.querySelectorAll('.hello')[0].style.top = `${110 + id * 20}px`;
+            document.querySelectorAll('.poster')[0].style.top = `${30 + id * 20}px`;
+            document.querySelectorAll('.poster__image')[0].src = `https://evandelia.com/img/${textParams[id].image}`;
         } else {
             document.querySelectorAll('.hello')[0].style.fontSize = '22vw';
         }
