@@ -8,13 +8,14 @@ varying vec2 vUv;
 
 void main()
 {
+    float length = length(vUv - 0.5);
     float elevation = (vElevation + uColorOffset) * uColorMultiplier;
     vec3 newCol = uDepthColor;
-    newCol.r += elevation - length(vUv - 0.5);
-    newCol.b -= vUv.y - length(vUv - 0.5);
+    newCol.r += elevation - length;
+    newCol.b -= vUv.y - length;
     vec3 color = mix(uSurfaceColor, newCol, elevation);
 
-    color *= .8 - length(vUv - 0.5);
+    color *= .8 - length;
 
     gl_FragColor = vec4(color, 1.0);
 }

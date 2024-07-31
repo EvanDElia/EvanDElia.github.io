@@ -141,7 +141,7 @@ const waterMaterial = new THREE.ShaderMaterial({
         uSmallWaveElevation: {value: 0.15},
         uSmallWaveFrequency: {value: 3 },
         uSmallWaveSpeed: { value: 0.2},
-        uSmallWaveIterations: {value: 4 },
+        uSmallWaveIterations: {value: 3 },
         uColorOffset: {value: 0.08},
         uColorMultiplier: {value: 5.},
         uDepthColor: { value: new THREE.Color(debugObject.depthColor) },
@@ -325,7 +325,7 @@ unrealBloomPass.threshold = 0.5;
 effectComposer.addPass(unrealBloomPass);
 
 //Debug
-if (params.has('secret') || params.has('gui') || params.has('debug') || !mobile) {
+if (!mobile) {
     gui.add(waterMaterial.uniforms.uBigWaveElevation, 'value').min(0).max(1).step(0.001).name('BigWaveElevation')
     gui.add(waterMaterial.uniforms.uBigWaveFrequency.value, 'x').min(0).max(5).step(0.01).name('BigWaveFreqX')
     gui.add(waterMaterial.uniforms.uBigWaveFrequency.value, 'y').min(0).max(5).step(0.01).name('BigWaveFreqY')
