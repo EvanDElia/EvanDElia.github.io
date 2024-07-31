@@ -25,57 +25,46 @@ function calcOffset(xPos, yPos) {
 
 const textParams = [
     {
-        top: '110px',
         fontSize: '100px',
         text: 'Slosh Seltzer'
     },
     {
-        top: '130px',
         fontSize: '100px',
         text: 'Pepsi'
     },
     {
-        top: '150px',
         fontSize: '100px',
         text: 'WSJ: The Field'
     },
     {
-        top: '180px',
         fontSize: '100px',
         text: 'Dreamwave'
     },
     {
-        top: '210px',
         fontSize: '100px',
         text: 'SXSW'
     },
     {
-        top: '230px',
+        fontSize: '100px',
+        text: 'ESPN Fifty50'
+    },
+    {
         fontSize: '100px',
         text: 'Doja Cat'
     },
     {
-        top: '250px',
         fontSize: '100px',
         text: '[adult swim]'
     },
     {
-        top: '280px',
         fontSize: '100px',
         text: '[as] music'
     },
     {
-        top: '310px',
-        fontSize: '100px',
-        text: 'Innovasian'
-    },
-    {
-        top: '330px',
         fontSize: '100px',
         text: 'Neon Night'
     },
     {
-        top: '350px',
         fontSize: '100px',
         text: 'Ocean World'
     }
@@ -99,7 +88,7 @@ document.querySelectorAll('.project').forEach((el, id) => {
         document.querySelectorAll('.hello')[0].innerText = textParams[id].text;
         if (!mobile) {
             document.querySelectorAll('.hello')[0].style.fontSize = textParams[id].fontSize;
-            document.querySelectorAll('.hello')[0].style.top = textParams[id].top;
+            document.querySelectorAll('.hello')[0].style.top = `${110 + id * 20}px`;
         } else {
             document.querySelectorAll('.hello')[0].style.fontSize = '22vw';
         }
@@ -197,7 +186,7 @@ window.addEventListener('resize', () =>
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
-camera.position.set(1.2, 0.25, 0)
+camera.position.set(1.2, 0.26, 0)
 scene.add(camera)
 
 // Controls
@@ -208,7 +197,8 @@ controls.enableDamping = true
  * Renderer
  */
 const renderer = new THREE.WebGLRenderer({
-    canvas: canvas
+    canvas: canvas,
+    powerPreference: 'high-performance'
 })
 renderer.setSize(sizes.width, sizes.height)
 renderer.outputEncoding = THREE.sRGBEncoding
@@ -312,20 +302,27 @@ const dotScreenShader = {
     }`
 }
 
-const dotScreenPass = new ShaderPass(dotScreenShader)
-if (!mobile) effectComposer.addPass(dotScreenPass)
+const dotScreenPass = new ShaderPass(dotScreenShader);
+if (!mobile) effectComposer.addPass(dotScreenPass);
 
 RGBShiftShader.uniforms.amount.value = 0.0039;
 RGBShiftShader.uniforms.angle.value = 0.121;
-const rgbShiftPass = new ShaderPass(RGBShiftShader)
+const rgbShiftPass = new ShaderPass(RGBShiftShader);
 rgbShiftPass.enabled = !mobile;
-effectComposer.addPass(rgbShiftPass)
+effectComposer.addPass(rgbShiftPass);
 
-const unrealBloomPass = new UnrealBloomPass()
-unrealBloomPass.strength = 0.4;
+const unrealBloomPass = new UnrealBloomPass();
+unrealBloomPass.strength = 1.2;
 unrealBloomPass.radius = 1;
-unrealBloomPass.threshold = 0.2;
-effectComposer.addPass(unrealBloomPass)
+unrealBloomPass.threshold = 0.5;
+// unrealBloomPass.bloomTintColors = [
+//     new THREE.Color('deeppink'),
+//     new THREE.Color('deeppink'),
+//     new THREE.Color('deeppink'),
+//     new THREE.Color('deeppink'),
+//     new THREE.Color('deeppink')
+// ];
+effectComposer.addPass(unrealBloomPass);
 
 //Debug
 if (params.has('secret') || params.has('gui') || params.has('debug') || !mobile) {
@@ -358,7 +355,7 @@ const tick = () =>
     // Update controls
     controls.update()
 
-    // camera.position.set(Math.cos(elapsedTime) + 1, 1, Math.sin(elapsedTime) + 1)
+    // camera.position.set(Math.cos((elapsedTime * 0.6)), Math.sin((elapsedTime * 0.6) - 10) * 0.5 + 0.6, Math.sin((elapsedTime * 0.6)))
 
     // Render
     // renderer.render(scene, camera)
