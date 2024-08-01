@@ -1,17 +1,30 @@
-@import url(https://fonts.googleapis.com/css?family=PT+Sans&display=swap);
 * {
   margin: 0;
   padding: 0;
 }
+a {
+  pointer-events: all;
+}
 html {
   overflow: hidden;
+}
+body {
+  opacity: 0;
+  transition: opacity 1s ease-out;
+}
+.dg.a {
+  position: absolute;
+  pointer-events: all;
+  right: 0;
+  height: min-content;
 }
 .webgl {
   position: fixed;
   top: 0;
   left: 0;
   outline: none;
-  z-index: -1;
+  z-index: 0;
+  cursor: grab;
 }
 body {
   background: black;
@@ -26,6 +39,11 @@ body {
 .main {
   color: white;
   font-family: 'Helvetica';
+  position: absolute;
+  width: 100dvw;
+  height: 100vh;
+  pointer-events: none;
+  user-select: none;
 }
 @media (max-width: 1024px) {
   .main {
@@ -57,11 +75,7 @@ body {
 .main a,
 .main .project {
   color: white;
-  text-decoration: underline;
-}
-.main a:link,
-.main .project:link {
-  text-decoration: underline;
+  width: max-content;
 }
 .main a:hover,
 .main .project:hover {
@@ -96,7 +110,7 @@ body {
 .main section .company-link {
   text-decoration: none;
   color: white;
-  transition: text-decoration 0.2 ease-in-out;
+  transition: text-decoration 0.3s ease-in-out;
 }
 .main section .company-link:hover {
   text-decoration: underline;
@@ -130,6 +144,7 @@ body {
   height: 100%;
   transform-style: preserve-3d;
   perspective: 1000px;
+  pointer-events: none;
 }
 @media (max-width: 1370px) {
   .main #content #landing {
@@ -147,6 +162,7 @@ body {
   perspective: 1000px;
   opacity: 0.333;
   transition: opacity 0.7s ease;
+  pointer-events: none;
 }
 .main #content #landing .front {
   top: 13vh;
@@ -156,10 +172,23 @@ body {
 .main #content #landing .front img {
   transform: translateZ(200px);
 }
+.main #content #landing .poster {
+  margin: 0 auto;
+  opacity: 0;
+  transition: opacity 1s ease-out;
+  width: min-content;
+  top: 100px;
+  position: relative;
+  max-width: 50vw;
+}
+.main #content #landing .poster img {
+  width: 50vw;
+  border-radius: 20px;
+}
 .main #content #landing .hello {
-  font-size: 650px;
+  font-size: 150px;
   color: white;
-  transform: translateZ(-20px);
+  text-shadow: 2px 2px 4px black;
 }
 .main #content #landing .behind {
   left: 50px;
@@ -179,11 +208,17 @@ body {
 .main .resume {
   transform: rotate(-90deg);
   position: absolute;
-  left: 0px;
+  left: 2em;
+  bottom: 20vh;
   width: 0%;
   font-size: 16px;
 }
 @media (max-width: 1024px) {
+  .main .resume {
+    display: none;
+  }
+}
+@media (max-height: 840px) {
   .main .resume {
     display: none;
   }
@@ -196,30 +231,31 @@ body {
   right: calc(75vh - 160px);
 }
 .main .copyright-section {
-  transform: rotate(90deg);
   position: absolute;
-  right: 62.2%;
-  top: 0%;
-  width: 0%;
+  right: 3em;
+  bottom: 0%;
 }
 @media (max-width: 1024px) {
   .main .copyright-section {
-    right: 2em;
-    font-size: 0.5em;
-    z-index: -1;
-    top: 80vh;
+    opacity: 0;
   }
 }
 .main .headings,
 .main .link-section {
   font-size: 16px;
   margin-left: 3em;
+  z-index: 2;
 }
 @media (max-width: 1024px) {
   .main .headings,
   .main .link-section {
     margin-left: 0em;
   }
+}
+.main .headings .subtitle,
+.main .link-section .subtitle {
+  text-decoration: underline;
+  margin-bottom: 10px;
 }
 .main .headings .name a,
 .main .link-section .name a {
@@ -236,17 +272,26 @@ body {
 }
 .main .headings .project,
 .main .link-section .project {
-  padding: 2px;
+  padding: 4px 2px;
+  margin: 4px 0;
   letter-spacing: 0px;
-  transition: letter-spacing 2s;
+  transition: letter-spacing 1.2s ease-out, opacity 0.3s ease-out;
   display: block;
+  text-decoration: none;
 }
 .main .headings .project:hover,
 .main .link-section .project:hover {
   letter-spacing: 6px;
+  opacity: 1 !important;
+}
+.main .headings.hovering .project {
+  opacity: 0.5;
 }
 .main .link-section {
   position: absolute;
+}
+.main .link-section a {
+  margin: 0px 5px;
 }
 @media (min-width: 900px) {
   .main .link-section {
