@@ -39,7 +39,7 @@ const textParams = [
     },
     {
         fontSize: '100px',
-        image: 'pepsi.jpg',
+        image: 'pepsi-dance.jpg',
         text: 'Pepsi'
     },
     {
@@ -49,7 +49,7 @@ const textParams = [
     },
     {
         fontSize: '100px',
-        image: 'sxsw.jpg',
+        image: 'soundwaves.png',
         text: 'SXSW'
     },
     {
@@ -121,8 +121,13 @@ setTimeout(() => {
     document.getElementById('nameBox').style.opacity = 1;
     document.body.style.opacity = 1;
     // document.querySelectorAll('.main')[0].style['mix-blend-mode'] = 'difference';
-}, 10)
 
+    console.log('%c Hey what are you doing looking at the code for my site?', 'background: #f22; color: #bada55');
+console.log('%c Well here are some hidden links on the adultswim website that the company never took down if that kind of thing interests you ;)', 'background: #000; color: #fff');
+console.log('%c https://www.adultswim.com/misc/not-a-link/', 'background: #000; color: #fff');
+console.log('%c https://www.adultswim.com/misc/primal-backgrounds/', 'background: #000; color: #fff');
+console.log('%c https://www.adultswim.com/misc/eric-andre-hot-babes-of-instagram/', 'background: #000; color: #fff');
+}, 10)
 
 /**
  * Base
