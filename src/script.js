@@ -208,7 +208,10 @@ window.addEventListener('resize', () =>
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 100)
 camera.position.set(1.2, 0.26, 0)
-scene.add(camera)
+const wrapper = new THREE.Group();
+wrapper.add(camera);
+scene.add(wrapper);
+
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
@@ -374,6 +377,7 @@ let mousePos =  {
     y: 0
 }
 let nextPos = 0;
+let grabbing = false;
 
 if (!mobile) {
     window.addEventListener('mousemove', (e) => {
@@ -382,10 +386,12 @@ if (!mobile) {
     });
 
     window.addEventListener('pointerdown', (e) => {
+        grabbing = true;
         canvas.style.cursor = 'grabbing';
     });
 
     window.addEventListener('pointerup', (e) => {
+        grabbing = false;
         canvas.style.cursor = 'grab';
     });
 }
@@ -409,6 +415,11 @@ const tick = () =>
 
     // Call tick again on the next frame
     window.requestAnimationFrame(tick);
+
+    if (!grabbing) {
+        // wrapper.rotation.x = lerp(wrapper.rotation.x, mousePos.x / window.innerWidth * 2, 0.02);
+        wrapper.rotation.y = lerp(wrapper.rotation.y, mousePos.y / window.innerHeight * 2 + mousePos.x / window.innerWidth * 2, 0.02);
+    }
 }
 
 tick();
