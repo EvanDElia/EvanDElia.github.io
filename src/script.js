@@ -24,6 +24,14 @@ window.onclick = () => {
     bg_audio.volume = 0.7;
     if (bg_audio.currentTime == 0) bg_audio.play()
 }
+
+window.ontouchstart = () => {
+    audioEnabled = true;
+    audio_tooltip.style.transform = 'translateY(-10px)'
+    audio_tooltip.style.opacity = 0;
+    bg_audio.volume = 0.7;
+    if (bg_audio.currentTime == 0) bg_audio.play()
+}
 function isPlaying(plr) {
     if (plr.paused || (plr.ended && plr.readyState == 0))
         return false
