@@ -1,5 +1,6 @@
 @text-color: white;
 @background-color: black;
+@font: 'Helvetica';
 
 * {
     margin: 0;
@@ -38,6 +39,7 @@ body {
 body {
     background: @background-color;
     overflow: hidden;
+    font-family: @font;
 
     @media (max-width: 1024px) {
         overflow-y: auto;
@@ -45,9 +47,37 @@ body {
     }
 }
 
+audio {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+}
+
+#tooltip {
+    position: absolute;
+    width: 25vw;
+    left: calc(37.5vw - 20px);
+    top: 50px;
+    background: radial-gradient(#101010, #252525 100%);
+    border-radius: 30px;
+    padding: 20px 4px;
+    transition: all 0.35s ease-out;
+    color: white;
+    text-align: center;
+    transform: translateY(10px);
+    text-shadow: 3px 3px 1px black;
+    z-index: 100;
+
+    @media(max-width: 1024px) {
+        left: calc(25vw - 30px);
+        width: 50vw;
+        padding: 30px;
+        top: 65vh;
+    }
+}
+
 .main {
     color: @text-color;
-    font-family: 'Helvetica';
     position: absolute;
     width: 100dvw;
     height: 100vh;
@@ -60,7 +90,6 @@ body {
     }
 
     h1, h2 {
-        font-family: 'Helvetica';
         font-size: 24px !important;
     }
 
@@ -309,19 +338,16 @@ body {
 
     .link-section {
         position: absolute;
+        bottom: 0px;
 
         a {
             margin: 0px 5px;
         }
-
-        @media (min-width: 900px) {
-            bottom: 0px;
-        }
-
+        
         @media (max-width: 1024px) {
             right: 10px;
             font-size: 0.82em;
-            bottom: 0px;
+            bottom: 10px;
         }
     }
 }

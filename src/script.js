@@ -12,6 +12,24 @@ import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPa
 import waterVertexShader from './shaders/vertex.glsl'
 import waterFragmentShader from './shaders/fragment.glsl'
 
+let audioEnabled = false;
+const ui_audio = document.getElementById('ui_sound');
+const bg_audio = document.getElementById('bg_sound');
+const audio_tooltip = document.getElementById('tooltip');
+
+window.onclick = () => {
+    audioEnabled = true;
+    audio_tooltip.style.transform = 'translateY(-10px)'
+    audio_tooltip.style.opacity = 0;
+    bg_audio.volume = 0.7;
+    if (bg_audio.currentTime == 0) bg_audio.play()
+}
+function isPlaying(plr) {
+    if (plr.paused || (plr.ended && plr.readyState == 0))
+        return false
+    return true
+}
+
 function isMobile() {
     if ('maxTouchPoints' in navigator) return navigator.maxTouchPoints > 0;
 
@@ -112,6 +130,12 @@ document.querySelectorAll('.project').forEach((el, id) => {
         document.querySelectorAll('.hello')[0].style.opacity = 1;
         window.stopAnimating = true;
         document.querySelectorAll('.headings')[0].classList.add('hovering');
+
+        if (audioEnabled) {
+            ui_audio.volume = 0.1 + Math.random() * 0.3;
+            ui_audio.currentTime = 0;
+            ui_audio.play();
+        }
     }
 })
 
@@ -120,6 +144,14 @@ document.querySelectorAll('.copyright')[0].innerText += ` ${new Date().getFullYe
 setTimeout(() => {
     document.getElementById('nameBox').style.opacity = 1;
     document.body.style.opacity = 1;
+    audio_tooltip.style.transform = 'translateY(0px)'
+    audio_tooltip.style.opacity = 1;
+
+    setTimeout(() => {
+        audio_tooltip.style.transform = 'translateY(-10px)'
+        audio_tooltip.style.opacity = 0;
+    }, 5000);
+
     // document.querySelectorAll('.main')[0].style['mix-blend-mode'] = 'difference';
 
     console.log('%c Hey what are you doing looking at the code for my site?', 'background: #f22; color: #bada55');

@@ -15,6 +15,7 @@
 </head>
 <body>
     <canvas class="webgl"></canvas>
+    <div id="tooltip">Click anywhere to enable audio</div>
     <div class="main">
         <section class="headings">
             <div class="box" id="nameBox">
@@ -69,5 +70,11 @@
             </div>
         </div>
     </div>
+    <audio id="ui_sound">
+        <source src="https://evandelia.com/audio/ui.mp3" type="audio/mpeg">
+    </audio>
+    <audio id="bg_sound" loop>
+        <source src="https://evandelia.com/audio/bg_audio.mp3" type="audio/mpeg">
+    </audio>
 </body>
 </html>
