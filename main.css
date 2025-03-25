@@ -79,9 +79,11 @@ audio {
     overflow: hidden;
   }
 }
-.main h1,
-.main h2 {
+.main h1 {
   font-size: 24px !important;
+}
+.main h2 {
+  font-size: 12px;
 }
 .main h1,
 .main h2,
@@ -296,6 +298,10 @@ audio {
 .main .headings h2,
 .main .link-section h2 {
   margin: 0px;
+}
+.main .headings h2.description,
+.main .link-section h2.description {
+  margin-top: 15px;
 }
 .main .headings .project,
 .main .link-section .project {
